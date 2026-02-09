@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>oslo object</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --text: #f4f4ef;
+      --muted: rgba(244,244,239,0.6);
+      --line: rgba(244,244,239,0.18);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: var(--text);
+      background: #000;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== BACKGROUND STAGE ===== */
+    .stage {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("bg-blur.jpg"); /* <- DEIN BLURRY FOTO */
+      background-size: cover;
+      background-position: center;
+      filter: blur(22px) brightness(0.55) saturate(0.9);
+      transform: scale(1.1);
+    }
+
+    .stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      padding: 2.5rem 3rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      letter-spacing: 0.28em;
+      font-weight: 500;
+      text-transform: lowercase;
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+
+    .hero {
+      max-width: 1100px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+    }
+
+    .divider {
+      width: 120px;
+      height: 1px;
+      background: var(--line);
+      margin: 3rem auto;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .statement {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      color: rgba(244,244,239,0.45);
+      text-transform: uppercase;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      color: rgba(244,244,239,0.35);
+      text-transform: uppercase;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 700px) {
+      header, footer {
+        padding: 1.8rem 1.5rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="stage"></div>
+
+  <header>
+    <div class="logo">oslo object</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>oslo object</h1>
+
+      <div class="divider"></div>
+
+      <p>
+        Archaische Objekte aus Stahl und Holz.<br>
+        Gebaut für Feuer, Gewicht und Zeit.<br>
+        Reduziert auf das, was bleibt.
+      </p>
+
+      <div class="statement">
+        Handmade · Germany
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© oslo object</span>
+    <span>est. quietly</span>
+  </footer>
+
+</body>
+</html>
