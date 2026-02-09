@@ -1,431 +1,179 @@
-<!--
-pinterest.html — OSLO OBJECT
-Pinterest Landing (cold traffic) • fullscreen hero • minimal copy • partner CTA
-Copy-Paste in GitHub: Add file → Create new file → pinterest.html
-Dann Commit.
--->
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>oslo object — where it all began…</title>
+  <title>oslo object — handcrafted outdoor objects</title>
 
   <style>
     :root{
-      --bg: #050505;
-      --off: #f2efe8;
-      --muted: rgba(242,239,232,.70);
-      --hair: rgba(242,239,232,.16);
-      --shadow: rgba(0,0,0,.55);
+      --bg: #070707;
+      --fg: #f3f0e8;       /* off-white */
+      --muted: rgba(243,240,232,.72);
+      --hair: rgba(243,240,232,.18);
+      --card: rgba(0,0,0,.35);
 
-      /* Typo */
-      --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-              Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      --tracking-tight: -0.02em;
-      --tracking-wide: 0.08em;
+      /* ✅ Bild hier anpassen, falls es anders heißt */
+      --hero-image: url("origin-blur.jpg");
     }
 
-    /* RESET */
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ height:100%; }
     body{
-      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background: var(--bg);
-      color: var(--off);
-      font-family: var(--font);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: geometricPrecision;
-      overflow-x: hidden;
+      color: var(--fg);
+      overflow-x:hidden;
     }
-
-    a{ color: var(--off); text-decoration: none; }
-    a:hover{ text-decoration: underline; text-underline-offset: .25em; }
 
     /* HERO */
     .hero{
+      min-height: 100svh;
       position: relative;
-      min-height: 100svh; /* iOS safe viewport */
-      display: grid;
-      align-items: end;
-      justify-items: start;
-      padding: clamp(22px, 5vw, 72px);
-      background: #000;
-      overflow: hidden;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+      padding: clamp(18px, 3vw, 36px);
+      isolation:isolate;
     }
-
     .hero::before{
       content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 42%, rgba(0,0,0,.18) 100%),
-        url("origin-blur.jpg");
+      position:absolute; inset:0;
+      background-image: var(--hero-image);
       background-size: cover;
       background-position: center;
-      filter: saturate(.95) contrast(1.05);
-      transform: scale(1.03);
+      filter: blur(18px) grayscale(100%);
+      transform: scale(1.08);
+      opacity:.9;
+      z-index:-3;
     }
-
-    /* Subtle film grain (cheap but chic) */
     .hero::after{
       content:"";
-      position:absolute;
-      inset:0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      opacity: .25;
-      pointer-events:none;
+      position:absolute; inset:0;
+      background: radial-gradient(1200px 600px at 30% 70%, rgba(0,0,0,.25), rgba(0,0,0,.75)),
+                  linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,.20));
+      z-index:-2;
     }
 
-    .hero-inner{
-      position: relative;
-      z-index: 2;
-      max-width: 72ch;
+    .frame{
+      width:min(980px, 100%);
+      border: 1px solid var(--hair);
+      background: var(--card);
+      backdrop-filter: blur(6px);
+      padding: clamp(18px, 3vw, 34px);
     }
 
     .kicker{
-      display: inline-flex;
-      gap: .65rem;
-      align-items: center;
-      padding: .55rem .75rem;
-      border: 1px solid var(--hair);
-      border-radius: 999px;
-      background: rgba(0,0,0,.22);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 18px 40px rgba(0,0,0,.25);
-      margin-bottom: 16px;
       font-size: 12px;
-      letter-spacing: var(--tracking-wide);
+      letter-spacing: .28em;
       text-transform: uppercase;
       color: var(--muted);
+      margin-bottom: 14px;
     }
 
-    .dot{
-      width: 8px;
-      height: 8px;
-      border-radius: 99px;
-      background: var(--off);
-      opacity: .72;
-    }
-
-    .hero-title{
-      margin: 0 0 10px 0;
+    h1{
       font-weight: 520;
-      font-size: clamp(38px, 5.8vw, 86px);
-      line-height: 0.98;
-      letter-spacing: var(--tracking-tight);
+      line-height: .95;
+      font-size: clamp(42px, 6.2vw, 92px);
+      letter-spacing: -0.02em;
       text-transform: lowercase;
-      text-shadow: 0 18px 40px var(--shadow);
+      margin-bottom: 14px;
     }
 
-    .hero-sub{
-      margin: 0;
-      max-width: 62ch;
-      font-size: clamp(14px, 1.55vw, 18px);
-      line-height: 1.55;
+    .sub{
+      font-size: clamp(14px, 1.4vw, 18px);
       color: var(--muted);
-      text-shadow: 0 14px 30px rgba(0,0,0,.65);
+      line-height: 1.55;
+      max-width: 62ch;
+      margin-bottom: 22px;
     }
 
     .cta-row{
-      margin-top: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 10px;
     }
-
-    .btn{
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    a.btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
       padding: 12px 14px;
-      border-radius: 999px;
       border: 1px solid var(--hair);
-      background: rgba(0,0,0,.25);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: var(--off);
-      font-size: 13px;
-      letter-spacing: 0.02em;
-      box-shadow: 0 18px 46px rgba(0,0,0,.25);
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
-      text-decoration: none;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(242,239,232,.28);
-      background: rgba(0,0,0,.34);
-      text-decoration: none;
-    }
-
-    .btn svg{
-      width: 16px;
-      height: 16px;
-      opacity: .9;
-    }
-
-    /* SECTION */
-    .section{
-      padding: clamp(36px, 7vw, 90px) clamp(22px, 5vw, 72px);
-      border-top: 1px solid rgba(242,239,232,.08);
-      background: radial-gradient(1200px 700px at 20% 0%, rgba(242,239,232,.05), transparent 55%),
-                  radial-gradient(900px 600px at 80% 20%, rgba(242,239,232,.035), transparent 60%),
-                  var(--bg);
-    }
-
-    .wrap{
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .grid{
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: clamp(18px, 3vw, 44px);
-      align-items: start;
-    }
-
-    @media (max-width: 880px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
-    .statement{
-      margin: 0 0 18px 0;
-      font-weight: 500;
-      font-size: clamp(20px, 2.2vw, 28px);
-      line-height: 1.25;
-      letter-spacing: -0.01em;
+      color: var(--fg);
+      text-decoration:none;
+      background: rgba(0,0,0,.35);
+      transition: transform .15s ease, background .15s ease;
+      font-size: 14px;
+      letter-spacing: .02em;
       text-transform: lowercase;
     }
+    a.btn:hover{ transform: translateY(-1px); background: rgba(0,0,0,.55); }
 
-    .copy{
-      margin: 0;
+    .meta{
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--hair);
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px 18px;
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.75;
+      font-size: 13px;
+      line-height:1.5;
     }
 
-    .copy b{ color: var(--off); font-weight: 560; }
-
-    .card{
-      border: 1px solid rgba(242,239,232,.10);
-      border-radius: 18px;
-      padding: 18px 18px;
-      background: rgba(255,255,255,.02);
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-    }
-
-    .card h3{
-      margin: 0 0 10px 0;
-      font-size: 12px;
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 650;
-    }
-
-    .list{
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .list li{
-      padding-left: 14px;
-      position: relative;
-    }
-    .list li::before{
-      content:"";
-      position: absolute;
-      left: 0;
-      top: .62em;
-      width: 6px;
-      height: 6px;
-      border-radius: 99px;
-      background: rgba(242,239,232,.42);
-    }
-
-    /* FEATURE STRIP (optional images, you can later swap) */
-    .strip{
-      margin-top: clamp(18px, 3vw, 34px);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 880px){
-      .strip{ grid-template-columns: 1fr; }
-    }
-    .ph{
-      position: relative;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(242,239,232,.10);
-      background: rgba(255,255,255,.02);
-      min-height: 220px;
-    }
-    .ph::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,.15));
-    }
-    .ph > span{
-      position:absolute;
-      left: 16px;
-      bottom: 14px;
-      font-size: 12px;
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-      color: rgba(242,239,232,.78);
-      opacity: .95;
-    }
+    .meta b{ color: var(--fg); font-weight: 520; }
 
     /* FOOTER */
     footer{
-      padding: 22px clamp(22px, 5vw, 72px);
-      border-top: 1px solid rgba(242,239,232,.08);
-      background: #000;
-      color: rgba(242,239,232,.66);
+      background:#000;
+      border-top:1px solid rgba(255,255,255,.06);
+      padding: 18px clamp(18px, 3vw, 36px);
+      color: rgba(243,240,232,.65);
       font-size: 12px;
-      letter-spacing: 0.04em;
+      letter-spacing: .02em;
+      text-transform: lowercase;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
     }
-    .footer-wrap{
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-left{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-    .sep{ opacity: .35; }
-
-    .footer-right a{
-      color: rgba(242,239,232,.78);
-    }
+    footer a{ color: rgba(243,240,232,.75); text-decoration:none; border-bottom:1px solid rgba(243,240,232,.18); }
+    footer a:hover{ color: var(--fg); border-bottom-color: rgba(243,240,232,.5); }
   </style>
 </head>
 
 <body>
-  <!-- HERO -->
-  <header class="hero" role="banner" aria-label="oslo object — pinterest landing">
-    <div class="hero-inner">
-      <div class="kicker"><span class="dot"></span> oslo object</div>
-
-      <h1 class="hero-title">where it all began…</h1>
-      <p class="hero-sub">
-        handbuilt objects in steel, fire & wood — minimal, quiet, brutal.
-        no catalog. no mass production. custom pieces on request.
+  <section class="hero">
+    <div class="frame">
+      <div class="kicker">handarbeit · stahl · holz · outdoor</div>
+      <h1>oslo object</h1>
+      <p class="sub">
+        brutal clean outdoor pieces — fire frames, benches & lounge objects.
+        made from real old planks and raw steel. sizes configurable. unicats on request.
       </p>
 
       <div class="cta-row">
-        <a class="btn" href="index.html" aria-label="zur startseite">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 3l9 8h-3v10h-5v-6H11v6H6V11H3l9-8Z" stroke="currentColor" stroke-width="1.7" />
-          </svg>
-          startseite
-        </a>
+        <a class="btn" href="index.html">zur startseite</a>
+        <a class="btn" href="about.html">über uns</a>
+        <a class="btn" href="mailto:hallo@derzeitzuzweit.de?subject=oslo%20object%20—%20partner%20%2F%20anfrage">partner / anfrage</a>
+      </div>
 
-        <a class="btn" href="about.html" aria-label="über uns">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" stroke="currentColor" stroke-width="1.7"/>
-            <path d="M4 21c1.4-4 5-6 8-6s6.6 2 8 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-          </svg>
-          über uns
-        </a>
-
-        <a class="btn" href="mailto:hallo@derzeitzuzweit.de?subject=Partner%20%2F%20Custom%20Inquiry%20%E2%80%94%20oslo%20object" aria-label="partneranfrage senden">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.7"/>
-            <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-          </svg>
-          partner inquiries
-        </a>
+      <div class="meta">
+        <span><b>custom sizes:</b> auf anfrage</span>
+        <span><b>unikate:</b> ja</span>
+        <span><b>material:</b> rohstahl · corten-style · alte bohlen</span>
       </div>
     </div>
-  </header>
+  </section>
 
-  <!-- CONTENT -->
-  <main class="section" role="main">
-    <div class="wrap">
-      <div class="grid">
-        <div>
-          <h2 class="statement">
-            steel. wood. fire.<br />
-            less noise. more object.
-          </h2>
-
-          <p class="copy">
-            we build a few things. <b>very well.</b><br />
-            each piece is made from real, reclaimed material (plettac scaffold boards, raw steel),
-            finished to last — and to look better with time.
-          </p>
-
-          <div class="strip" aria-label="preview blocks">
-            <div class="ph" aria-label="fire frame preview placeholder">
-              <!-- Optional: later set a real image:
-                   style="background:url('fireframe.jpg') center/cover no-repeat"
-              -->
-              <span>fire frame</span>
-            </div>
-
-            <div class="ph" aria-label="lounge preview placeholder">
-              <span>lounge furniture</span>
-            </div>
-          </div>
-        </div>
-
-        <aside class="card" aria-label="quick facts">
-          <h3>custom + partner</h3>
-          <ul class="list">
-            <li>sizes & layouts on request (one-offs possible)</li>
-            <li>private & commercial projects</li>
-            <li>small batches, local production</li>
-            <li>for collaborations: <a href="mailto:hallo@derzeitzuzweit.de?subject=Partner%20%2F%20Custom%20Inquiry%20%E2%80%94%20oslo%20object">hallo@derzeitzuzweit.de</a></li>
-          </ul>
-        </aside>
-      </div>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
   <footer>
-    <div class="footer-wrap">
-      <div class="footer-left">
-        <span>© <span id="y"></span> oslo object</span>
-        <span class="sep">·</span>
-        <span>handarbeit aus stahl</span>
-      </div>
-
-      <div class="footer-right">
-        <a href="index.html">start</a>
-        <span class="sep"> · </span>
-        <a href="about.html">über uns</a>
-        <span class="sep"> · </span>
-        <a href="mailto:hallo@derzeitzuzweit.de?subject=Partner%20%2F%20Custom%20Inquiry%20%E2%80%94%20oslo%20object">kontakt</a>
-      </div>
+    <div>© oslo object · handarbeit aus stahl & holz</div>
+    <div>
+      <a href="about.html">über uns</a> ·
+      <a href="mailto:hallo@derzeitzuzweit.de">kontakt</a>
     </div>
   </footer>
-
-  <script>
-    // year
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
