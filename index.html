@@ -3,14 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <title>oslo object</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Basic SEO -->
+  <meta name="description" content="Handgefertigte Feuerstellen, Grill- und Objektlösungen aus Stahl. Reduziert. Echt. Oslo Object." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #000000;
-      --text: #f4f4ef;
-      --muted: rgba(244,244,239,0.55);
-      --line: rgba(244,244,239,0.15);
+      --offwhite: #f2f2ef;
+      --black: #000000;
     }
 
     * {
@@ -21,139 +27,79 @@
 
     html, body {
       height: 100%;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--offwhite);
     }
 
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ===== LAYOUT ===== */
-
-    header {
-      padding: 2.5rem 3rem;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .logo {
-      font-size: 1.1rem;
-      letter-spacing: 0.28em;
-      font-weight: 500;
-      text-transform: lowercase;
-    }
-
-    main {
-      flex: 1;
+    /* HERO */
+    .hero {
+      height: 100vh;
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.25),
+          rgba(0,0,0,0.55)
+        ),
+        url("hero.jpg"); /* <-- DEIN BILD */
+      background-size: cover;
+      background-position: center;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
+      padding: 6vw;
     }
 
-    .hero {
-      max-width: 1100px;
-      width: 100%;
-      text-align: center;
+    .hero-content {
+      max-width: 800px;
     }
 
-    .hero h1 {
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      margin-bottom: 2rem;
+    .brand {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.2rem;
     }
 
-    .hero p {
-      font-size: clamp(1rem, 2vw, 1.35rem);
-      line-height: 1.7;
-      color: var(--muted);
-      max-width: 720px;
-      margin: 0 auto;
+    .claim {
+      font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+      font-weight: 300;
+      line-height: 1.4;
+      max-width: 520px;
     }
 
-    /* ===== DIVIDER ===== */
-
-    .divider {
-      width: 120px;
-      height: 1px;
-      background: var(--line);
-      margin: 3rem auto;
-    }
-
-    /* ===== STATEMENT BLOCK ===== */
-
-    .statement {
-      margin-top: 3rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.18em;
-      color: rgba(244,244,239,0.4);
-      text-transform: uppercase;
-    }
-
-    /* ===== FOOTER ===== */
-
+    /* FOOTER */
     footer {
-      padding: 2rem 3rem;
-      border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      color: rgba(244,244,239,0.35);
-      text-transform: uppercase;
+      background: var(--black);
+      padding: 4rem 6vw;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
     }
 
-    footer span {
-      white-space: nowrap;
+    footer a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
     }
 
-    /* ===== MOBILE ===== */
-
-    @media (max-width: 700px) {
-      header, footer {
-        padding: 1.8rem 1.5rem;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 0.8rem;
-        align-items: center;
-      }
+    footer a:hover {
+      color: var(--offwhite);
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">oslo object</div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h1>oslo object</h1>
-
-      <div class="divider"></div>
-
-      <p>
-        Archaische Objekte aus Stahl und Holz.<br>
-        Gebaut für Feuer, Gewicht und Zeit.<br>
-        Reduziert auf das, was bleibt.
-      </p>
-
-      <div class="statement">
-        Handmade · Germany
+  <section class="hero">
+    <div class="hero-content">
+      <div class="brand">oslo object</div>
+      <div class="claim">
+        Feuerstellen und Objekte aus Stahl.<br>
+        Reduziert. Ehrlich. Handgefertigt.
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <footer>
-    <span>© oslo object</span>
-    <span>est. quietly</span>
+    © oslo object · Handarbeit aus Stahl · <a href="#">Impressum</a>
   </footer>
 
 </body>
