@@ -1,102 +1,226 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>oslo object</title>
 
   <style>
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root{
+      --bg:#050505;
+      --off:#f2f1ed;
+      --muted: rgba(242,241,237,.72);
+      --shadow: rgba(0,0,0,.55);
     }
 
-    html, body {
-      height: 100%;
-      background: #000;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Inter, Helvetica, Arial, sans-serif;
-      color: #f2f1ee; /* off-white */
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ height:100%; background:var(--bg); color:var(--off); }
+
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      letter-spacing: .02em;
     }
 
     /* HERO */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      width: 100%;
-      background-image: url("assets/hero-blur.jpg");
+    .hero{
+      position:relative;
+      min-height:100svh;
+      width:100%;
+      overflow:hidden;
+      background: #000;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image: var(--hero-img);
       background-size: cover;
       background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      filter: blur(14px) saturate(0.9) contrast(1.05) brightness(.65);
+      transform: scale(1.08);
     }
 
-    /* dunkle Ruhe */
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
+    /* optional grain vibe */
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(transparent 0%, rgba(0,0,0,.35) 70%),
+        linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.55));
+      pointer-events:none;
     }
 
-    /* TYPO */
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2rem;
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      min-height:100svh;
+      display:flex;
+      align-items:flex-end;
+      padding: clamp(22px, 4vw, 64px);
     }
 
-    .hero h1 {
-      font-size: clamp(2.8rem, 6vw, 6rem);
-      font-weight: 500;
-      letter-spacing: 0.04em;
+    .typo{
+      max-width: 980px;
+      text-shadow: 0 10px 40px var(--shadow);
+    }
+
+    .brand{
+      font-size: clamp(16px, 1.6vw, 18px);
       text-transform: lowercase;
+      opacity:.9;
+      margin-bottom: 14px;
     }
 
-    .hero p {
-      margin-top: 1.2rem;
-      font-size: clamp(1rem, 1.6vw, 1.4rem);
-      opacity: 0.85;
-      letter-spacing: 0.03em;
+    .headline{
+      font-size: clamp(44px, 6.8vw, 92px);
+      line-height: .96;
+      font-weight: 650;
+      text-transform: lowercase;
+      letter-spacing: -0.02em;
     }
 
-    /* FOOTER */
-    footer {
-      background: #000;
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.85rem;
-      opacity: 0.6;
+    .subline{
+      margin-top: 16px;
+      font-size: clamp(14px, 1.7vw, 18px);
+      color: var(--muted);
+      max-width: 62ch;
     }
 
-    footer a {
-      color: #f2f1ee;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(242,241,238,0.3);
+    .cta-row{
+      margin-top: 18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
     }
 
-    footer a:hover {
-      opacity: 1;
+    a.btn{
+      display:inline-block;
+      padding: 10px 14px;
+      border: 1px solid rgba(242,241,237,.28);
+      color: var(--off);
+      text-decoration:none;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,.18);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      font-size: 14px;
+      letter-spacing:.02em;
     }
+    a.btn:hover{ transform: translateY(-1px); background: rgba(0,0,0,.28); border-color: rgba(242,241,237,.42); }
+
+    a.link{
+      color: var(--muted);
+      text-decoration:none;
+      border-bottom: 1px solid rgba(242,241,237,.18);
+      padding-bottom:2px;
+    }
+    a.link:hover{ color: var(--off); border-color: rgba(242,241,237,.4); }
+
+    footer{
+      background:#000;
+      padding: 18px 22px;
+      font-size: 13px;
+      color: rgba(242,241,237,.62);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    footer a{ color: rgba(242,241,237,.7); text-decoration:none; }
+    footer a:hover{ color: rgba(242,241,237,.95); }
+
+    /* small helper for "pinterest mode" badge */
+    .badge{
+      display:none;
+      margin-bottom: 10px;
+      font-size: 12px;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: rgba(242,241,237,.7);
+    }
+    .badge.on{ display:inline-block; }
   </style>
 </head>
 
 <body>
+  <main class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="typo">
+        <div class="badge" id="badge">pinterest</div>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>oslo object</h1>
-      <p>handarbeit aus stahl</p>
+        <div class="brand">oslo object</div>
+
+        <h1 class="headline" id="headline">handarbeit aus stahl.</h1>
+
+        <p class="subline" id="subline">
+          fire frames · loungemöbel · unikate auf anfrage.
+          rohstahl, corten-look, alte plettac-bohlen.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn" id="cta" href="about.html">über uns</a>
+          <a class="link" href="mailto:hallo@derzeitzuzweit.de">partneranfragen</a>
+        </div>
+      </div>
     </div>
-  </section>
+  </main>
 
   <footer>
-    © oslo object · <a href="impressum.html">Impressum</a>
+    <div>© oslo object · handarbeit aus stahl</div>
+    <div>
+      <a href="impressum.html">impressum</a> ·
+      <a href="datenschutz.html">datenschutz</a>
+    </div>
   </footer>
 
+  <script>
+    /*
+      MINI-JS (10–20 Zeilen Kernlogik)
+      - random hero image per load
+      - optional auto-rotate
+      - pinterest referrer mode (different CTA/text)
+    */
+
+    // 1) HERO IMAGES (anpassen!)
+    const HERO_IMAGES = [
+      "assets/origin-blur.jpg",
+      // "assets/terrace-blur.jpg",
+      // "assets/fireframe-blur.jpg",
+    ];
+
+    // 2) SETTINGS
+    const AUTO_ROTATE = false;     // true = wechselt automatisch
+    const ROTATE_MS   = 6500;      // Wechselintervall
+
+    // 3) APPLY HERO
+    const heroEl = document.getElementById("hero");
+    let idx = Math.floor(Math.random() * HERO_IMAGES.length);
+    const applyHero = (i) => {
+      heroEl.style.setProperty("--hero-img", `url('${HERO_IMAGES[i]}')`);
+    };
+    applyHero(idx);
+
+    // 4) OPTIONAL ROTATION
+    if (AUTO_ROTATE && HERO_IMAGES.length > 1) {
+      setInterval(() => {
+        idx = (idx + 1) % HERO_IMAGES.length;
+        applyHero(idx);
+      }, ROTATE_MS);
+    }
+
+    // 5) PINTEREST MODE (Referrer)
+    const ref = (document.referrer || "").toLowerCase();
+    const isPinterest = ref.includes("pinterest.");
+    if (isPinterest) {
+      document.getElementById("badge").classList.add("on");
+      document.getElementById("headline").textContent = "unikate für draußen.";
+      document.getElementById("subline").textContent =
+        "minimal, roh, schwer. fire frames & loungemöbel – größen frei konfigurierbar. anfrage in 60 sekunden.";
+      document.getElementById("cta").textContent = "anfragen";
+      document.getElementById("cta").setAttribute("href", "mailto:hallo@derzeitzuzweit.de?subject=OSLO%20OBJECT%20Anfrage");
+    }
+  </script>
 </body>
 </html>
