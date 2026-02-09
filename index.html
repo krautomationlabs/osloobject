@@ -1,621 +1,160 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <title>oslo object</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>oslo object — archaische Outdoor-Objekte aus Stahl & Gerüstbohlen</title>
-  <meta name="description" content="oslo object fertigt archaische Outdoor-Objekte: Fire Frame (Feuerkorb/Feuerstelle), Sitzbänke und Tische aus alten Gerüstbohlen. Optional Grill- & Pizzastein-Option." />
-  <meta name="theme-color" content="#0e1114" />
+
   <style>
-    :root{
-      --bg:#0e1114;
-      --panel:#12161b;
-      --text:#e9eef4;
-      --muted:#a8b3c2;
-      --line:rgba(233,238,244,.10);
-      --accent:#cfa76a; /* warmes Understatement (Metall/Feuer) */
-      --accent2:#6f7a86; /* kühles Grau */
-      --max:1100px;
-      --r:16px;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background: radial-gradient(900px 500px at 20% 10%, rgba(207,167,106,.12), transparent 55%),
-                  radial-gradient(700px 500px at 85% 20%, rgba(111,122,134,.14), transparent 60%),
-                  var(--bg);
-      letter-spacing:.2px;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(14,17,20,.92), rgba(14,17,20,.55));
-      border-bottom:1px solid var(--line);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      padding:12px 0;
-      min-width:220px;
-    }
-    .mark{
-      width:36px; height:36px; border-radius:10px;
-      background:
-        linear-gradient(135deg, rgba(207,167,106,.95), rgba(207,167,106,.25)),
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%);
-      box-shadow: 0 10px 24px rgba(207,167,106,.18);
-      border:1px solid rgba(207,167,106,.35);
-    }
-    .brand h1{
-      margin:0; font-size:14px; letter-spacing:.7px; text-transform:lowercase;
-    }
-    .brand span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
-    .menu{
-      display:flex; gap:18px; flex-wrap:wrap; align-items:center;
-      font-size:13px; color:var(--muted);
-    }
-    .menu a{padding:10px 8px; border-radius:10px}
-    .menu a:hover{background:rgba(233,238,244,.06); color:var(--text)}
-    .cta{
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:10px 14px; border-radius:12px;
-      border:1px solid var(--line);
-      background: rgba(233,238,244,.06);
-      color:var(--text);
-      font-size:13px;
-      transition: transform .08s ease, background .15s ease, border-color .15s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{background:rgba(233,238,244,.09); border-color:rgba(233,238,244,.16)}
-    .btn:active{transform: translateY(1px)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(207,167,106,.95), rgba(207,167,106,.55));
-      border-color: rgba(207,167,106,.35);
-      color:#14100b;
-      font-weight:600;
-    }
-    .btn.primary:hover{filter: brightness(1.03)}
-    .hero{ padding:56px 0 26px; }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:22px;
-      align-items:stretch;
-    }
-    @media (max-width: 920px){
-      .grid{grid-template-columns:1fr}
-      .cta{justify-content:flex-start}
-    }
-    .card{
-      background: linear-gradient(180deg, rgba(18,22,27,.88), rgba(18,22,27,.72));
-      border:1px solid var(--line);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-    }
-    .heroMain{padding:26px}
-    .kicker{
-      display:inline-flex; gap:8px; align-items:center;
-      font-size:12px; color:var(--muted);
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:7px 10px;
-      background: rgba(233,238,244,.05);
-    }
-    .dot{
-      width:8px; height:8px; border-radius:99px;
-      background: rgba(207,167,106,.92);
-      box-shadow: 0 0 0 4px rgba(207,167,106,.14);
-    }
-    h2{
-      margin:16px 0 10px;
-      font-size:40px;
-      line-height:1.05;
-      letter-spacing:-.6px;
-    }
-    @media (max-width: 520px){ h2{font-size:34px} }
-    p{margin:0 0 12px; color:var(--muted); line-height:1.6}
-    .heroActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-    .micro{
-      margin-top:14px;
-      display:flex; gap:10px; flex-wrap:wrap;
-      color:rgba(168,179,194,.95);
-      font-size:12px;
-    }
-    .micro span{
-      padding:7px 10px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background: rgba(233,238,244,.04);
+    :root {
+      --bg: #000000;
+      --text: #f4f4ef;
+      --muted: rgba(244,244,239,0.55);
+      --line: rgba(244,244,239,0.15);
     }
 
-    .heroMedia{
-      padding:16px;
-      display:grid;
-      grid-template-rows: auto 1fr;
-      gap:12px;
-      min-height: 360px;
-    }
-    .mediaTop{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:10px 12px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background: rgba(233,238,244,.04);
-    }
-    .mediaTop strong{font-size:13px}
-    .mediaTop small{color:var(--muted)}
-    .mediaStage{
-      border-radius: 14px;
-      border:1px solid var(--line);
-      overflow:hidden;
-      position:relative;
-      background: radial-gradient(600px 280px at 50% 30%, rgba(207,167,106,.14), transparent 62%),
-                  linear-gradient(135deg, rgba(233,238,244,.06), rgba(233,238,244,.02));
-      min-height: 290px;
-    }
-    .mediaStage .ph{
-      position:absolute; inset:0;
-      display:flex; align-items:flex-end; justify-content:flex-start;
-      padding:16px;
-      background:
-        linear-gradient(to top, rgba(0,0,0,.55), transparent 55%),
-        radial-gradient(400px 240px at 30% 20%, rgba(255,255,255,.08), transparent 60%);
-    }
-    .ph .label{
-      max-width: 90%;
-      font-size:12px;
-      color: rgba(233,238,244,.92);
-      border:1px solid rgba(233,238,244,.16);
-      background: rgba(14,17,20,.55);
-      padding:10px 12px;
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    section{padding:18px 0}
-    .sectionHead{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
-      margin:18px 0 12px;
-    }
-    .sectionHead h3{margin:0; font-size:18px; letter-spacing:.2px}
-    .sectionHead p{margin:0; max-width: 560px}
-    .tiles{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    @media (max-width: 920px){ .tiles{grid-template-columns:1fr} }
-    .tile{
-      padding:16px;
-      border-radius: var(--r);
-      border:1px solid var(--line);
-      background: rgba(233,238,244,.03);
-    }
-    .tile h4{margin:0 0 6px; font-size:14px}
-    .tile p{margin:0; font-size:13px}
-
-    .products{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:14px;
-    }
-    @media (max-width: 920px){ .products{grid-template-columns:1fr} }
-    .prod{
-      padding:18px;
-      border-radius: var(--r);
-      border:1px solid var(--line);
-      background: rgba(233,238,244,.03);
-    }
-    .prod .top{
-      display:flex; gap:12px; align-items:flex-start; justify-content:space-between;
-      margin-bottom:10px;
-    }
-    .tag{
-      display:inline-flex; gap:8px; align-items:center;
-      font-size:12px; color:rgba(14,17,20,.9);
-      background: rgba(207,167,106,.92);
-      border:1px solid rgba(207,167,106,.35);
-      padding:6px 10px;
-      border-radius:999px;
-      font-weight:600;
-      white-space:nowrap;
-    }
-    .tag.alt{
-      background: rgba(233,238,244,.08);
-      border-color: rgba(233,238,244,.14);
+    html, body {
+      height: 100%;
+      background: var(--bg);
       color: var(--text);
-      font-weight:500;
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-    ul{
-      margin:10px 0 0;
-      padding-left:18px;
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== LAYOUT ===== */
+
+    header {
+      padding: 2.5rem 3rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      letter-spacing: 0.28em;
+      font-weight: 500;
+      text-transform: lowercase;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+
+    .hero {
+      max-width: 1100px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      line-height: 1.7;
       color: var(--muted);
-      line-height:1.6;
-      font-size:13px;
-    }
-    .note{
-      margin-top:10px;
-      font-size:12px;
-      color: rgba(168,179,194,.95);
-      border-left:2px solid rgba(207,167,106,.6);
-      padding-left:10px;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:10px;
-    }
-    @media (max-width: 920px){ .gallery{grid-template-columns: repeat(2,1fr)} }
-    .shot{
-      aspect-ratio: 4 / 3;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: linear-gradient(135deg, rgba(233,238,244,.06), rgba(233,238,244,.02));
-      position:relative;
-      overflow:hidden;
-    }
-    .shot span{
-      position:absolute; left:10px; bottom:10px;
-      font-size:11px; color: rgba(233,238,244,.88);
-      background: rgba(14,17,20,.55);
-      border:1px solid rgba(233,238,244,.14);
-      padding:6px 8px; border-radius:10px;
-      backdrop-filter: blur(8px);
+    /* ===== DIVIDER ===== */
+
+    .divider {
+      width: 120px;
+      height: 1px;
+      background: var(--line);
+      margin: 3rem auto;
     }
 
-    .split{
-      display:grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    @media (max-width: 920px){ .split{grid-template-columns:1fr} }
-    .form{
-      padding:18px;
-      border-radius: var(--r);
-      border:1px solid var(--line);
-      background: rgba(233,238,244,.03);
-    }
-    label{display:block; font-size:12px; color:var(--muted); margin:10px 0 6px}
-    input, textarea, select{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 12px;
-      border:1px solid rgba(233,238,244,.14);
-      background: rgba(14,17,20,.6);
-      color: var(--text);
-      outline:none;
-    }
-    textarea{min-height:110px; resize:vertical}
-    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    @media (max-width:520px){ .row{grid-template-columns:1fr} }
-    .fine{ font-size:12px; color:var(--muted); margin-top:10px }
+    /* ===== STATEMENT BLOCK ===== */
 
-    footer{
-      margin-top:26px;
-      border-top:1px solid var(--line);
-      background: rgba(0,0,0,.18);
+    .statement {
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      color: rgba(244,244,239,0.4);
+      text-transform: uppercase;
     }
-    .foot{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px; flex-wrap:wrap;
-      padding:18px 0;
-      color: var(--muted);
-      font-size:12px;
+
+    /* ===== FOOTER ===== */
+
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      color: rgba(244,244,239,0.35);
+      text-transform: uppercase;
     }
-    .foot a{color:var(--muted)}
-    .foot a:hover{color:var(--text)}
+
+    footer span {
+      white-space: nowrap;
+    }
+
+    /* ===== MOBILE ===== */
+
+    @media (max-width: 700px) {
+      header, footer {
+        padding: 1.8rem 1.5rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 
 <body>
+
   <header>
-    <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="oslo object">
-        <div class="mark" aria-hidden="true"></div>
-        <div>
-          <h1>oslo object</h1>
-          <span>Stahl. Feuer. Gerüstbohle.</span>
-        </div>
-      </a>
-
-      <nav class="menu" aria-label="Navigation">
-        <a href="#produkte">Objekte</a>
-        <a href="#material">Material</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#anfrage">Anfrage</a>
-      </nav>
-
-      <div class="cta">
-        <a class="btn" href="#anfrage">Angebot anfordern</a>
-        <a class="btn primary" href="#produkte">Fire Frame ansehen</a>
-      </div>
-    </div>
+    <div class="logo">oslo object</div>
   </header>
 
-  <main id="top" class="wrap">
+  <main>
     <section class="hero">
-      <div class="grid">
-        <div class="card heroMain">
-          <div class="kicker"><span class="dot"></span> handmade • archaisch • outdoor</div>
-          <h2>Objekte, die nach Feuer aussehen.<br/>Und nach Arbeit.</h2>
-          <p>
-            <strong>oslo object</strong> baut archaische Outdoor-Objekte aus <strong>Baustahlmatten (6&nbsp;mm)</strong>
-            und <strong>echten alten Plettac-Gerüstbohlen</strong> — kompromisslos, gerade, ehrlich.
-          </p>
-          <p>
-            Start: <strong>Fire Frame</strong> (Feuerkorb / Feuerstelle) + <strong>Sitzbank</strong>.
-            Ab Frühling: <strong>Grill- & Pizzastein-Option</strong> (als Modul / Einsatz).
-          </p>
+      <h1>oslo object</h1>
 
-          <div class="heroActions">
-            <a class="btn primary" href="#anfrage">Jetzt Angebot sichern</a>
-            <a class="btn" href="#galerie">Render-/Foto-Stil ansehen</a>
-            <a class="btn" href="#produkte">Serienübersicht</a>
-          </div>
+      <div class="divider"></div>
 
-          <div class="micro">
-            <span>Handarbeit</span>
-            <span>schwere Optik, klare Linien</span>
-            <span>Stahl roh oder “Corten-Style”</span>
-            <span>Made in DE (Werkstatt)</span>
-          </div>
-        </div>
+      <p>
+        Archaische Objekte aus Stahl und Holz.<br>
+        Gebaut für Feuer, Gewicht und Zeit.<br>
+        Reduziert auf das, was bleibt.
+      </p>
 
-        <div class="card heroMedia">
-          <div class="mediaTop">
-            <div>
-              <strong>Hybrid-Render Look</strong><br />
-              <small>Real-Hintergrund + Produkt als Render</small>
-            </div>
-            <div class="tag alt">Preview</div>
-          </div>
-
-          <div class="mediaStage" role="img" aria-label="Hero Render Platzhalter">
-            <div class="ph">
-              <div class="label">
-                Platzhalter: Hier kommt das <strong>Hero-Rendering</strong> rein (Cleo/Terrasse + Fire Frame).
-                <br/>Datei später ersetzen → <code>background-image</code> oder <code>&lt;img&gt;</code>.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="material">
-      <div class="sectionHead">
-        <div>
-          <h3>Warum das funktioniert</h3>
-          <p>Archaisch, monochrom, clean. Kein Deko-Kram. Nur Material + Proportion.</p>
-        </div>
-      </div>
-
-      <div class="tiles">
-        <div class="tile">
-          <h4>6 mm Baustahlmatte</h4>
-          <p>Gleiche Linienstärke überall (ohne zusätzliche “Verstärkung”). Robust, grafisch, wiedererkennbar.</p>
-        </div>
-        <div class="tile">
-          <h4>Gerüstbohlen (Plettac)</h4>
-          <p>Echte alte Bohlen, sichtbar gealtert. Handarbeit-Finish. Optional mit zugekauften Tischkufen.</p>
-        </div>
-        <div class="tile">
-          <h4>Corten-Style</h4>
-          <p>Optik-Variante: “Corten-Look” (warm/rostig). Passt brutal gut zu Feuer & Stein.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="produkte">
-      <div class="sectionHead">
-        <div>
-          <h3>Serienübersicht</h3>
-          <p>Der Kern ist modular: Frame + Bank. Danach kommen Tisch & Grill/Pizza-Einsatz.</p>
-        </div>
-        <a class="btn" href="#anfrage">Preis/Verfügbarkeit anfragen</a>
-      </div>
-
-      <div class="products">
-        <div class="prod">
-          <div class="top">
-            <div>
-              <h4 style="margin:0 0 6px;font-size:16px;">Fire Frame</h4>
-              <p style="margin:0;">Feuerkorb / Feuerstelle als Objekt. Minimal. Stark. Fotogen.</p>
-            </div>
-            <span class="tag">Core</span>
-          </div>
-          <ul>
-            <li>Geometrischer Rahmen aus Baustahlmatten (6 mm), überall gleiche Linienstärke</li>
-            <li>Optional: Innen-Einsatz (Grillrost) & Pizzastein-Modul (ab Frühling)</li>
-            <li>Finish: Rohstahl / Schwarz / “Corten-Style”</li>
-          </ul>
-          <div class="note">Hinweis: Grill/Pizza wird als <strong>Modul</strong> gedacht — clean, nicht “Campingküche”.</div>
-        </div>
-
-        <div class="prod">
-          <div class="top">
-            <div>
-              <h4 style="margin:0 0 6px;font-size:16px;">Sitzbank</h4>
-              <p style="margin:0;">Matching zur Fire Frame Optik. Optional “zweite Bank” mit eingelassener Grilloption.</p>
-            </div>
-            <span class="tag alt">Matching</span>
-          </div>
-          <ul>
-            <li>Bank-Frame aus 6 mm Matte, gleiche Strebenoptik wie Fire Frame</li>
-            <li>Sitzfläche: Gerüstbohle (Plettac), geölt oder roh/gebürstet</li>
-            <li>Variante: “Grill-Bank” mit Einsatz/Stein-Modul</li>
-          </ul>
-        </div>
-
-        <div class="prod">
-          <div class="top">
-            <div>
-              <h4 style="margin:0 0 6px;font-size:16px;">Tische aus Gerüstbohlen</h4>
-              <p style="margin:0;">Outdoor-Tische (Brett) — robust, clean, passend zum Frame-Look.</p>
-            </div>
-            <span class="tag alt">Add-on</span>
-          </div>
-          <ul>
-            <li>Plettac-Gerüstbohlen, handgefertigt</li>
-            <li>Optional: zugekaufte Tischkufen (clean, schwarz / stahl)</li>
-            <li>Finish: Öl/Versiegelung nach Einsatz (Terrasse/Garten)</li>
-          </ul>
-        </div>
-
-        <div class="prod">
-          <div class="top">
-            <div>
-              <h4 style="margin:0 0 6px;font-size:16px;">Corten-Style (Serie)</h4>
-              <p style="margin:0;">Einheitlicher Look über alle Produkte: warm, brutal, premium.</p>
-            </div>
-            <span class="tag alt">Style</span>
-          </div>
-          <ul>
-            <li>Optik-Variante für Frame/Bank/Tisch-Details</li>
-            <li>Perfekt für Foto/Hybrid-Render (Feuer + Abendlicht)</li>
-            <li>Skalierbar als “Signature” Linie</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="galerie">
-      <div class="sectionHead">
-        <div>
-          <h3>Galerie</h3>
-          <p>Platzhalter bis die finalen Renderings freigegeben sind. Danach ersetzen wir diese Kacheln 1:1.</p>
-        </div>
-        <a class="btn" href="#anfrage">Finale Renderings anfordern</a>
-      </div>
-
-      <div class="gallery">
-        <div class="shot"><span>Fire Frame — Night / Wall</span></div>
-        <div class="shot"><span>Bank + Frame — Terrasse</span></div>
-        <div class="shot"><span>Grill/Pizza Modul — Detail</span></div>
-        <div class="shot"><span>Tisch — Gerüstbohle</span></div>
-        <div class="shot"><span>Corten-Style — Warm</span></div>
-        <div class="shot"><span>Schwarz — Clean</span></div>
-        <div class="shot"><span>Set — Frame + Bank</span></div>
-        <div class="shot"><span>Detail — Linienstärke</span></div>
-      </div>
-    </section>
-
-    <section id="anfrage">
-      <div class="sectionHead">
-        <div>
-          <h3>Angebot / Anfrage</h3>
-          <p>Du sagst “was & wann”, wir antworten mit Preis, Lieferzeit und Optionen (Roh/Schwarz/Corten-Style).</p>
-        </div>
-      </div>
-
-      <div class="split">
-        <div class="form">
-          <h4 style="margin:0 0 8px;font-size:16px;">Kurzanfrage</h4>
-          <p class="fine" style="margin-top:0">
-            Hinweis: Das ist ein <strong>reines HTML-Template</strong>. Für echtes Senden: E-Mail-Link oder Backend/Forms.
-          </p>
-
-          <form action="#" method="post">
-            <div class="row">
-              <div>
-                <label for="name">Name</label>
-                <input id="name" name="name" placeholder="Vorname Nachname" />
-              </div>
-              <div>
-                <label for="ort">Ort</label>
-                <input id="ort" name="ort" placeholder="PLZ / Stadt" />
-              </div>
-            </div>
-
-            <div class="row">
-              <div>
-                <label for="objekt">Objekt</label>
-                <select id="objekt" name="objekt">
-                  <option>Fire Frame</option>
-                  <option>Fire Frame + Bank (Set)</option>
-                  <option>Bank (solo)</option>
-                  <option>Bank mit Grill/Pizza-Einsatz</option>
-                  <option>Tisch aus Gerüstbohlen</option>
-                </select>
-              </div>
-              <div>
-                <label for="finish">Finish</label>
-                <select id="finish" name="finish">
-                  <option>Rohstahl</option>
-                  <option>Schwarz</option>
-                  <option>Corten-Style</option>
-                </select>
-              </div>
-            </div>
-
-            <label for="msg">Wunsch / Timing</label>
-            <textarea id="msg" name="msg" placeholder="z.B. Set bis vor 14.02., Grill/Pizza ab Frühling…"></textarea>
-
-            <div class="heroActions" style="margin-top:12px;">
-              <button class="btn primary" type="submit">Anfrage (Placeholder)</button>
-              <a class="btn" href="mailto:REPLACE-ME@osloobject.com?subject=oslo%20object%20Anfrage&body=Hi%20oslo%20object%2C%0A%0AIch%20interessiere%20mich%20f%C3%BCr%3A%20%0AOrt%3A%20%0AFinish%3A%20%0ATiming%3A%20%0A%0ADanke!">E-Mail öffnen</a>
-            </div>
-
-            <p class="fine">Datenschutz/Impressum: Links unten im Footer als Platzhalter.</p>
-          </form>
-        </div>
-
-        <div class="form">
-          <h4 style="margin:0 0 8px;font-size:16px;">Kurz-FAQ</h4>
-
-          <div class="tile" style="margin-top:10px;">
-            <h4>Wie “archaisch” bleibt’s mit Grill/Pizza?</h4>
-            <p>Der Einsatz ist ein <strong>Modul</strong>: unsichtbar wenn nicht genutzt, clean wenn aktiv. Kein Küchendesign.</p>
-          </div>
-
-          <div class="tile" style="margin-top:10px;">
-            <h4>Warum keine Pflanzen/“Lifestyle” jetzt?</h4>
-            <p>Weil der Look zuerst über <strong>Material</strong> & <strong>Proportion</strong> verkauft. Pflanzen kommen später als optionales Setting.</p>
-          </div>
-
-          <div class="tile" style="margin-top:10px;">
-            <h4>Was brauchst du für ein Angebot?</h4>
-            <p>Objekt, Finish, grobes Timing, Lieferort. Dann kommt EK/VK-Logik intern + Angebot raus.</p>
-          </div>
-
-          <div class="note" style="margin-top:12px;">
-            Nächster Schritt: <strong>Finale Renderings</strong> reinziehen (deine “Fire Frame links”-Shots) und die Galerie ersetzen.
-          </div>
-        </div>
+      <div class="statement">
+        Handmade · Germany
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap foot">
-      <div>© <span id="y"></span> oslo object — handmade outdoor objects</div>
-      <div style="display:flex; gap:14px; flex-wrap:wrap;">
-        <a href="#top">Top</a>
-        <a href="#produkte">Objekte</a>
-        <a href="#anfrage">Anfrage</a>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-      </div>
-    </div>
+    <span>© oslo object</span>
+    <span>est. quietly</span>
   </footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
