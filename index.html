@@ -1,106 +1,373 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
   <title>oslo object</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Basic SEO -->
-  <meta name="description" content="Handgefertigte Feuerstellen, Grill- und Objektlösungen aus Stahl. Reduziert. Echt. Oslo Object." />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --offwhite: #f2f2ef;
-      --black: #000000;
+    :root{
+      --bg: #000;
+      --off: #F1EEE7;
+      --muted: rgba(241,238,231,.65);
+      --hair: rgba(241,238,231,.16);
+      --max: 1200px;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--off);
+      font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text",
+                   Inter, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
     }
 
-    html, body {
-      height: 100%;
-      font-family: 'Inter', sans-serif;
-      background: var(--black);
-      color: var(--offwhite);
+    /* ===== HERO ===== */
+    .hero{
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      background: #000;
     }
 
-    /* HERO */
-    .hero {
-      height: 100vh;
+    /* Background image layer */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
       background-image:
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,0.25),
-          rgba(0,0,0,0.55)
-        ),
-        url("hero.jpg"); /* <-- DEIN BILD */
+        radial-gradient(1200px 700px at 60% 35%, rgba(0,0,0,.10) 0%, rgba(0,0,0,.75) 70%, rgba(0,0,0,.92) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,.20), rgba(0,0,0,.78)),
+        url("assets/hero-blur.jpg");
       background-size: cover;
       background-position: center;
-      display: flex;
-      align-items: center;
-      padding: 6vw;
+      filter: blur(18px) saturate(1.08) contrast(1.05);
+      transform: scale(1.12);
+      opacity: .95;
     }
 
-    .hero-content {
-      max-width: 800px;
+    /* Soft grain */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity: .14;
+      pointer-events:none;
+      transform: rotate(-6deg);
     }
 
-    .brand {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      margin-bottom: 1.2rem;
+    /* Top micro-nav (optional minimalist) */
+    .topbar{
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      z-index: 5;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 20px 22px;
+      gap: 16px;
+    }
+    .brand{
+      display:flex;
+      align-items:baseline;
+      gap:12px;
+      letter-spacing:.08em;
+      text-transform: lowercase;
+      font-weight: 600;
+      font-size: 14px;
+      opacity: .92;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .brand .dot{ opacity:.55; }
+    .nav{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      font-size: 13px;
+    }
+    .nav a{
+      color: var(--muted);
+      text-decoration:none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: .2s ease;
+    }
+    .nav a:hover{
+      color: var(--off);
+      border-bottom-color: rgba(241,238,231,.35);
     }
 
-    .claim {
-      font-size: clamp(1.2rem, 2.4vw, 1.6rem);
-      font-weight: 300;
-      line-height: 1.4;
-      max-width: 520px;
+    /* Content */
+    .wrap{
+      position:relative;
+      z-index: 4;
+      width:min(var(--max), calc(100% - 44px));
+      margin: 0 auto;
+      padding: 92px 0 64px;
+      display:grid;
+      gap: 22px;
     }
 
-    /* FOOTER */
-    footer {
-      background: var(--black);
-      padding: 4rem 6vw;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
+    .kicker{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      letter-spacing:.18em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .kicker::before{
+      content:"";
+      width: 34px;
+      height: 1px;
+      background: var(--hair);
+      display:inline-block;
     }
 
-    footer a {
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
+    h1{
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 0.98;
+      font-size: clamp(44px, 6.5vw, 96px);
     }
 
-    footer a:hover {
-      color: var(--offwhite);
+    .sub{
+      max-width: 60ch;
+      font-size: clamp(16px, 1.7vw, 18px);
+      line-height: 1.55;
+      color: rgba(241,238,231,.78);
+      margin: 0;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      border: 1px solid rgba(241,238,231,.22);
+      color: var(--off);
+      text-decoration:none;
+      padding: 12px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      letter-spacing: .04em;
+      transition: .2s ease;
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+    }
+    .btn:hover{
+      border-color: rgba(241,238,231,.45);
+      background: rgba(0,0,0,.38);
+      transform: translateY(-1px);
+    }
+    .btn.secondary{
+      color: rgba(241,238,231,.78);
+      border-color: rgba(241,238,231,.16);
+    }
+
+    .meta{
+      display:flex;
+      gap: 14px;
+      flex-wrap:wrap;
+      margin-top: 8px;
+      color: rgba(241,238,231,.55);
+      font-size: 12px;
+      letter-spacing:.02em;
+    }
+    .pill{
+      border: 1px solid rgba(241,238,231,.12);
+      background: rgba(0,0,0,.18);
+      padding: 6px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Scroll hint */
+    .scroll{
+      position:absolute;
+      left:50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 5;
+      color: rgba(241,238,231,.55);
+      font-size: 11px;
+      letter-spacing:.18em;
+      text-transform: uppercase;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      user-select:none;
+      opacity:.9;
+    }
+    .scroll .line{
+      width: 52px;
+      height: 1px;
+      background: rgba(241,238,231,.18);
+      position: relative;
+      overflow:hidden;
+    }
+    .scroll .line::after{
+      content:"";
+      position:absolute;
+      left:-20%;
+      top:0;
+      height:1px;
+      width: 35%;
+      background: rgba(241,238,231,.48);
+      animation: scan 1.8s ease-in-out infinite;
+    }
+    @keyframes scan{
+      0%{ transform: translateX(0); opacity:.0; }
+      20%{ opacity:1; }
+      100%{ transform: translateX(260%); opacity:.0; }
+    }
+
+    /* ===== FOOTER (BLACK BAR) ===== */
+    footer{
+      background:#000;
+      border-top: 1px solid rgba(241,238,231,.08);
+      padding: 18px 22px;
+      color: rgba(241,238,231,.60);
+      font-size: 12px;
+      letter-spacing: .02em;
+    }
+    .footer-wrap{
+      width:min(var(--max), calc(100% - 44px));
+      margin: 0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    footer a{
+      color: rgba(241,238,231,.75);
+      text-decoration:none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition:.2s ease;
+    }
+    footer a:hover{
+      color: var(--off);
+      border-bottom-color: rgba(241,238,231,.35);
+    }
+
+    /* Small screens */
+    @media (max-width: 540px){
+      .topbar{ padding: 18px 16px; }
+      .wrap{ width: calc(100% - 32px); padding: 88px 0 58px; }
+      footer{ padding: 16px; }
+      .footer-wrap{ width: calc(100% - 32px); }
+      .nav{ display:none; } /* ultra clean on mobile */
     }
   </style>
 </head>
 
 <body>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="brand">oslo object</div>
-      <div class="claim">
-        Feuerstellen und Objekte aus Stahl.<br>
-        Reduziert. Ehrlich. Handgefertigt.
+  <header class="hero">
+    <div class="topbar">
+      <div class="brand">oslo object <span class="dot">•</span> handmade</div>
+      <nav class="nav" aria-label="Navigation">
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </div>
+
+    <main class="wrap">
+      <div class="kicker">Handarbeit aus alten Plettac-Gerüstbohlen</div>
+
+      <h1>
+        brutal clean<br>
+        objects.
+      </h1>
+
+      <p class="sub">
+        Minimalistische Holzobjekte aus echten, alten Gerüstbohlen — handgefertigt.
+        Reduziert. Ehrlich. Schwer. Genau so, wie es sein soll.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn" href="#shop">Shop ansehen →</a>
+        <a class="btn secondary" href="#about">Mehr erfahren</a>
       </div>
+
+      <div class="meta" aria-label="Highlights">
+        <span class="pill">Made in Handarbeit</span>
+        <span class="pill">Material: alte Plettac-Bohlen</span>
+        <span class="pill">Unikat-Charakter</span>
+      </div>
+    </main>
+
+    <div class="scroll">
+      <span>scroll</span>
+      <span class="line" aria-hidden="true"></span>
+      <span>down</span>
+    </div>
+  </header>
+
+  <!-- OPTIONAL: Sections (kannst du später füllen oder komplett löschen) -->
+  <section id="shop" style="padding:72px 0; border-top:1px solid rgba(241,238,231,.06);">
+    <div style="width:min(var(--max), calc(100% - 44px)); margin:0 auto; padding:0 22px; color:rgba(241,238,231,.70);">
+      <h2 style="margin:0 0 12px; font-size:18px; letter-spacing:.06em; text-transform:uppercase;">Shop</h2>
+      <p style="margin:0; max-width:70ch; line-height:1.6;">
+        Platzhalter. Hier kommen Produkte / Kategorien / CTA hin.
+      </p>
+    </div>
+  </section>
+
+  <section id="about" style="padding:72px 0; border-top:1px solid rgba(241,238,231,.06);">
+    <div style="width:min(var(--max), calc(100% - 44px)); margin:0 auto; padding:0 22px; color:rgba(241,238,231,.70);">
+      <h2 style="margin:0 0 12px; font-size:18px; letter-spacing:.06em; text-transform:uppercase;">About</h2>
+      <p style="margin:0; max-width:70ch; line-height:1.6;">
+        Platzhalter. Story / Material / Fertigung / Herkunft.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact" style="padding:72px 0; border-top:1px solid rgba(241,238,231,.06);">
+    <div style="width:min(var(--max), calc(100% - 44px)); margin:0 auto; padding:0 22px; color:rgba(241,238,231,.70);">
+      <h2 style="margin:0 0 12px; font-size:18px; letter-spacing:.06em; text-transform:uppercase;">Kontakt</h2>
+      <p style="margin:0; max-width:70ch; line-height:1.6;">
+        Platzhalter. Kontakt / Insta / Mail / Newsletter.
+      </p>
     </div>
   </section>
 
   <footer>
-    © oslo object · Handarbeit aus Stahl · <a href="#">Impressum</a>
+    <div class="footer-wrap">
+      <div>© <span id="y"></span> oslo object · Handarbeit aus Stahl & Holz</div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="/impressum/">Impressum</a>
+        <a href="/datenschutz/">Datenschutz</a>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
